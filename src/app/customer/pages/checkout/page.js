@@ -8,7 +8,7 @@ import {jwtDecode} from 'jwt-decode'; // Note: corrected import
 import Modal from 'react-modal';
 import { toast, ToastContainer } from 'react-toastify'; // Ensure this line is correct
 import 'react-toastify/dist/ReactToastify.css'; // Ensure this line is correct
-import { sendOrderConfirmation } from '@/app/util/sendOrderConfirmation';
+// import { sendOrderConfirmation } from '@/app/util/sendOrderConfirmation';
 
 // Your component code follows...
 

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import prisma from '../../util/prisma';
 import jwt from 'jsonwebtoken';
 // import { sendOrderConfirmation } from '../../util/sendOrderConfirmation';
-import { sendOrderConfirmation } from '@/app/util/sendOrderConfirmation';
+// import { sendOrderConfirmation } from '@/app/util/sendOrderConfirmation';
 
 
 const SECRET_KEY = process.env.JWT_SECRET || 'your_secret_key';
