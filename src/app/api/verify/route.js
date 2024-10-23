@@ -1,7 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
-
+import prisma from '../../util/prisma'
 export async function GET(request) {
   const url = new URL(request.url);
   const token = url.searchParams.get('token');
