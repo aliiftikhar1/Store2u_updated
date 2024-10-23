@@ -97,7 +97,7 @@ useEffect(() => {
         <div className="flex flex-col gap-2 col-span-2">
           <p className="text-[20px] font-[600]">Support</p>
           <p className="text-[15px] font-[400]">Email: info@store2u.ca</p>
-          <p className="text-[15px] font-[400]">Phone: +92310356111</p>
+          <p className="text-[15px] font-[400]">Phone: +923310356111</p>
           <p className="text-[15px] font-[400]">Address: PO Chak No. 356/jb Khalsa Abad, Tehsil Gojra, District Toba Tek Singh, Punjab, Pakistan</p>
         </div>
       </div>

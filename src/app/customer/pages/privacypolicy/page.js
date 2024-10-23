@@ -79,7 +79,7 @@ const PrivacyPolicy = () => {
           PO Chak No. 356/jb Khalsa Abad, Tehsil Gojra,District Toba Tek Singh, Punjab, Pakistan<br />
           56000<br />
           Pakistan<br />
-          +92310356111<br />
+          +923310356111<br />
           <a href="info@store2u.ca" className="text-blue-500 hover:underline">info@store2u.ca</a>
         </address>
 

@@ -64,7 +64,7 @@ const Contact = () => {
               <h2 className="text-2xl font-semibold text-gray-800 mb-4">Contact Information</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
                 <strong>Email:</strong> <a href="pkmushad236@gmail.com" className="text-blue-500 hover:underline">info@store2u.ca</a><br />
-                <strong>Phone:</strong> <a href="tel:03356768338" className="text-blue-500 hover:underline">+92310356111</a><br />
+                <strong>Phone:</strong> <a href="tel:03356768338" className="text-blue-500 hover:underline">+923310356111</a><br />
                 <strong>Address:</strong> PO Chak No. 356/jb Khalsa Abad, Tehsil Gojra,District Toba Tek Singh, Punjab, Pakistan
               </p>
             </section>
