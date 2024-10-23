@@ -33,30 +33,17 @@ ChartJS.register(
 );
 
 export default function Home() {
-  // Initialize with current date
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  // State to hold the stats data
   const [statsData, setStatsData] = useState(null);
-
-  // State to hold the sales data for the graph
   const [salesData, setSalesData] = useState({
     labels: [],
-    datasets: [
-      {
-        label: 'Revenue',
-        data: [],
-        borderColor: '#34D399', // Tailwind Green
-        backgroundColor: 'rgba(52, 211, 153, 0.2)', // Lighter green
-      },
-    ],
+    datasets: [],
   });
 
-  // Function to fetch data from the API
   const fetchData = async (startDate, endDate) => {
     try {
-      // Format dates as YYYY-MM-DD
       const date1 = startDate.toISOString().split('T')[0];
       const date2 = endDate.toISOString().split('T')[0];
 
@@ -65,22 +52,19 @@ export default function Home() {
         body: JSON.stringify({ date1, date2 }),
       });
 
-      console.log("The response is : ",response);
       const result = await response.json();
 
       if (response.ok) {
-        // Update stats data
         setStatsData(result.data);
 
-        // Prepare sales data for the graph
-        // Here, we'll assume that the API provides daily revenue data in the result.
-        // If not, you may need to adjust this part based on your actual API response.
-
-        // For demonstration, let's create dummy sales data
+        // Prepare sales data for the graph, each status will have its own dataset
         const salesLabels = [];
-        const salesValues = [];
+        const pendingAmounts = [];
+        const paidAmounts = [];
+        const shippedAmounts = [];
+        const completedAmounts = [];
+        const cancelledAmounts = [];
 
-        // Generate dates between startDate and endDate
         const currentDate = new Date(startDate);
         while (currentDate <= endDate) {
           salesLabels.push(
@@ -89,21 +73,54 @@ export default function Home() {
               day: 'numeric',
             })
           );
-          // For demonstration, sum up amounts from all statuses for each day
-          const totalAmountForDay = 0; // Replace with actual data if available
-          salesValues.push(totalAmountForDay);
+
+          const totalPending = result.data.pending?.amount || 0;
+          const totalPaid = result.data.paid?.amount || 0;
+          const totalShipped = result.data.shipped?.amount || 0;
+          const totalCompleted = result.data.completed?.amount || 0;
+          const totalCancelled = result.data.cancelled?.amount || 0;
+
+          pendingAmounts.push(totalPending);
+          paidAmounts.push(totalPaid);
+          shippedAmounts.push(totalShipped);
+          completedAmounts.push(totalCompleted);
+          cancelledAmounts.push(totalCancelled);
+
           currentDate.setDate(currentDate.getDate() + 1);
         }
 
-        // Update the sales data state
         setSalesData({
           labels: salesLabels,
           datasets: [
             {
-              label: 'Revenue',
-              data: salesValues,
-              borderColor: '#34D399',
-              backgroundColor: 'rgba(52, 211, 153, 0.2)',
+              label: 'Pending',
+              data: pendingAmounts,
+              borderColor: '#FBBF24', // Yellow
+              backgroundColor: 'rgba(251, 191, 36, 0.2)', // Lighter yellow
+            },
+            {
+              label: 'Paid',
+              data: paidAmounts,
+              borderColor: '#3B82F6', // Blue
+              backgroundColor: 'rgba(59, 130, 246, 0.2)', // Lighter blue
+            },
+            {
+              label: 'Shipped',
+              data: shippedAmounts,
+              borderColor: '#6366F1', // Indigo
+              backgroundColor: 'rgba(99, 102, 241, 0.2)', // Lighter indigo
+            },
+            {
+              label: 'Completed',
+              data: completedAmounts,
+              borderColor: '#10B981', // Green
+              backgroundColor: 'rgba(16, 185, 129, 0.2)', // Lighter green
+            },
+            {
+              label: 'Cancelled',
+              data: cancelledAmounts,
+              borderColor: '#EF4444', // Red
+              backgroundColor: 'rgba(239, 68, 68, 0.2)', // Lighter red
             },
           ],
         });
@@ -115,19 +132,16 @@ export default function Home() {
     }
   };
 
-  // Fetch data on component mount with initial dates
   useEffect(() => {
     fetchData(startDate, endDate);
   }, []);
 
-  // Handler for the Filter button
   const handleFilter = () => {
     if (startDate && endDate) {
       fetchData(startDate, endDate);
     }
   };
 
-  // Prepare stats for display
   const stats = useMemo(() => {
     if (!statsData) return [];
 
@@ -170,7 +184,6 @@ export default function Home() {
     ];
   }, [statsData]);
 
-  // Chart options
   const options = {
     responsive: true,
     plugins: {
@@ -184,7 +197,7 @@ export default function Home() {
       },
       title: {
         display: true,
-        text: 'Sales Over Time',
+        text: 'Sales by Status',
         font: {
           family: 'Inter, sans-serif',
           size: 18,
@@ -195,10 +208,8 @@ export default function Home() {
 
   return (
     <>
-      {/* Main Content */}
       <div className="pt-6 min-h-screen bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          {/* Date Pickers */}
           <div className="flex flex-col md:flex-row md:justify-between items-center mb-8">
             <div className="flex space-x-4 justify-center items-center">
               <div>
@@ -236,7 +247,6 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Stats Cards */}
           {stats.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               {stats.map((stat, index) => (
@@ -258,7 +268,7 @@ export default function Home() {
                         <span className="text-3xl">{stat.value}</span> Orders
                       </p>
                       <p className="text-md text-gray-500 mt-1">
-                        Amount: ${stat.amount.toLocaleString()}
+                        Amount: {stat.amount.toLocaleString()} Rs.
                       </p>
                     </div>
                   </div>
@@ -269,7 +279,6 @@ export default function Home() {
             <p>Loading stats...</p>
           )}
 
-          {/* Sales Graph */}
           <div className="bg-white p-6 rounded-lg shadow">
             <h2 className="text-xl font-semibold text-gray-700 mb-4">
               Sales Overview

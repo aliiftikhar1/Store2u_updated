@@ -76,7 +76,6 @@ const TopRatedProducts = () => {
           const originalPrice = calculateOriginalPrice(product.price, product.discount);
           return (
             <div
-              key={product.id}
               className="bg-white shadow-md rounded-sm cursor-pointer border border-gray-300 relative min-h-[320px] w-full"
             >
               {product.discount && (
@@ -89,7 +88,7 @@ const TopRatedProducts = () => {
                   <motion.img
                     src={`https://data.tascpa.ca/uploads/${product.images[0].url}`}
                     alt={product.name}
-                    className="h-[240px] w-full object-cover mb-4 rounded bg-white"
+                    className="h-[240px] w-full object-contain mb-4 rounded bg-white"
                     whileHover={{ scale: 1.1 }}
                     transition={{ duration: 0.3 }}
                     onClick={() => handleProductClick(product.slug)}
@@ -112,20 +111,20 @@ const TopRatedProducts = () => {
               <div className="px-2">
                 <div className="grid grid-cols-2 py-2">
                   <div className="flex items-center">
-                  {product.discount ? (
-  <div className="flex items-center justify-center gap-3 flex-row-reverse">
-    <p className="text-xs font-normal text-gray-700 line-through">
-      Rs.{formatPrice(product.price)}  {/* Format original price */}
-    </p>
-    <p className="text-md font-bold text-red-700">
-      Rs.{formatPrice(originalPrice)}  {/* Format discounted price */}
-    </p>
-  </div>
-) : (
-  <p className="text-md font-bold text-gray-700">
-    Rs.{formatPrice(product.price)}  {/* Format non-discounted price */}
-  </p>
-)}
+                    {product.discount ? (
+                      <div className="flex items-center justify-center gap-3 flex-row-reverse">
+                        <p className="text-xs font-normal text-gray-700 line-through">
+                          Rs.{formatPrice(product.price)}  {/* Format original price */}
+                        </p>
+                        <p className="text-md font-bold text-red-700">
+                          Rs.{formatPrice(originalPrice)}  {/* Format discounted price */}
+                        </p>
+                      </div>
+                    ) : (
+                      <p className="text-md font-bold text-gray-700">
+                        Rs.{formatPrice(product.price)}  {/* Format non-discounted price */}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <h3

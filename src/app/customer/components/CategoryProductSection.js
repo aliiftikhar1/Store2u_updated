@@ -34,7 +34,7 @@ const CategoryProductSection = ({ categoryImage, products }) => {
                 <img
                   src={product.imageUrl}
                   alt={product.name}
-                  className="h-[220px] w-full object-cover mb-4 rounded"
+                  className="h-[220px] w-full object-contain mb-4 rounded"
                 />
                 <div className="px-2">
                   <p className="text-sm font-medium text-gray-800 truncate">{product.name}</p>

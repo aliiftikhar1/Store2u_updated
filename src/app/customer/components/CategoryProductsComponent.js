@@ -113,7 +113,7 @@ const SubcategoryProductsComponent = () => {
                     <motion.img
                       src={`https://data.tascpa.ca/uploads/${product.images[0].url}`}
                       alt={product.name}
-                      className="h-40 w-full object-cover mb-4 rounded"
+                      className="h-40 w-full object-contain mb-4 rounded"
                       whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.3 }}
                       onError={(e) => {

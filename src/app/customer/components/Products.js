@@ -196,7 +196,7 @@ const Products = () => {
                               <motion.img
                                 src={`https://data.tascpa.ca/uploads/${product.images[0].url}`}
                                 alt={product.name}
-                                className="h-[220px] w-full object-cover mb-4 rounded bg-white cursor-pointer"
+                                className="h-[220px] w-full object-contain mb-4 rounded bg-white cursor-pointer"
                                 whileHover={{ scale: 1.1 }}
                                 transition={{ duration: 0.3 }}
                                 onClick={() => handleProductClick(product.slug)}
