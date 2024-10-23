@@ -25,7 +25,7 @@ const CheckoutPage = () => {
     phoneNumber: '+92',
     email: ''
   });
-  const [paymentMethod, setPaymentMethod] = useState('Cash on Delivery');
+  const [paymentMethod, setPaymentMethod] = useState('Credit Card');
   const [paymentInfo, setPaymentInfo] = useState({
     cardNumber: '',
     cardName: '',
@@ -638,17 +638,7 @@ const sendOrderConfirmation = async (email, name, orderId, total, items, address
 
             <div className="mt-6">
               <h2 className="text-2xl font-semibold mb-4">Payment Method</h2>
-              <div className="flex items-center mb-4">
-                <input
-                  type="radio"
-                  id="cod"
-                  name="paymentMethod"
-                  value="Cash on Delivery"
-                  checked={paymentMethod === 'Cash on Delivery'}
-                  onChange={(e) => handlePaymentMethodChange(e.target.value)}
-                />
-                <label htmlFor="cod" className="ml-2">Cash on Delivery</label>
-              </div>
+              
               <div className="flex items-center">
                 <input
                   type="radio"
@@ -660,9 +650,7 @@ const sendOrderConfirmation = async (email, name, orderId, total, items, address
                 />
                 <label htmlFor="creditCard" className="ml-2">Credit Card</label>
               </div>
-            </div>
-
-            {paymentMethod === 'Credit Card' && (
+              {paymentMethod === 'Credit Card' && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div className="mb-4 relative flex items-center">
                   <input
@@ -710,6 +698,20 @@ const sendOrderConfirmation = async (email, name, orderId, total, items, address
                 </div>
               </div>
             )}
+              <div className="flex items-center mb-4">
+                <input
+                  type="radio"
+                  id="cod"
+                  name="paymentMethod"
+                  value="Cash on Delivery"
+                  checked={paymentMethod === 'Cash on Delivery'}
+                  onChange={(e) => handlePaymentMethodChange(e.target.value)}
+                />
+                <label htmlFor="cod" className="ml-2">Cash on Delivery</label>
+              </div>
+            </div>
+
+       
 
             <button className="bg-teal-500 text-white py-2 px-4 rounded-md mt-8 w-full" type="submit">
               Place Order
