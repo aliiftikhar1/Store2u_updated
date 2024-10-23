@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FiPlus, FiMinus } from 'react-icons/fi';
-import { removeFromCart, updateQuantity, setCart } from '@/app/store/cartSlice';
+import { removeFromCart, updateQuantity, setCart } from '../../../store/cartSlice';
 
 const CartPage = () => {
   const [total, setTotal] = useState(0);

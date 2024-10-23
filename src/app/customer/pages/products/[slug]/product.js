@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
-import { addToCart, setCart } from '@/app/store/cartSlice';
+import { addToCart, setCart } from '../../../../store/cartSlice';
 import { ThreeDots } from 'react-loader-spinner';
 import Modal from 'react-modal';
 import { FiMinus, FiPlus } from 'react-icons/fi';

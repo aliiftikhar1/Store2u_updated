@@ -4,7 +4,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 import { FiShoppingCart, FiX, FiMinus, FiPlus, FiTrash2 } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { removeFromCart, updateQuantity, setCart } from '@/app/store/cartSlice';
+import { removeFromCart, updateQuantity, setCart } from '../../store/cartSlice';
 
 export default function WhatsAppButton() {
   const phoneNumber = '92310356111';

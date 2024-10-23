@@ -13,7 +13,8 @@ import { MdExpandMore } from 'react-icons/md';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import { setCart } from '@/app/store/cartSlice';
+import { setCart } from '../../store/cartSlice';
+// import { setCart } from '@/app/store/cartSlice';
 import { FaSearch } from 'react-icons/fa';
 
 const Header = () => {
