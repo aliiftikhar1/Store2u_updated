@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { FiUser, FiHome, FiMapPin, FiPhone, FiMail, FiCreditCard, FiCalendar, FiLock, FiTag } from 'react-icons/fi';
-import {jwtDecode} from 'jwt-decode'; // Note: corrected import
+import { jwtDecode } from 'jwt-decode'; // Note: corrected import
 import Modal from 'react-modal';
 import { toast, ToastContainer } from 'react-toastify'; // Ensure this line is correct
 import 'react-toastify/dist/ReactToastify.css'; // Ensure this line is correct
@@ -56,31 +56,31 @@ const CheckoutPage = () => {
   }, [paymentMethod]);
   const validateForm = () => {
     const { recipientName, streetAddress, city, state, zip, country, phoneNumber, email } = shippingAddress;
-  
+
     // Check if any of the required fields are empty
     if (!recipientName || !streetAddress || !city || !state || !zip || !country || !phoneNumber || !email) {
       toast.error('Please fill in all the required fields.');
       return false;
     }
-  
+
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       toast.error('Please enter a valid email address.');
       return false;
     }
-  
+
     // Validate phone number
     const phoneRegex = /^\+92\d{10}$/;
     if (!phoneRegex.test(phoneNumber)) {
       toast.error('Please enter a valid phone number.');
       return false;
     }
-  
+
     // All validations passed
     return true;
   };
-  
+
 
   const fetchSettings = async () => {
     try {
@@ -97,7 +97,7 @@ const CheckoutPage = () => {
   const fetchExtraDeliveryCharge = async () => {
     try {
       const response = await axios.get('/api/settings/getSettings');
-      const { other1 } = response.data; 
+      const { other1 } = response.data;
       setExtraDeliveryCharge(other1);
     } catch (error) {
       console.error('Error fetching extra delivery charge:', error);
@@ -108,16 +108,16 @@ const CheckoutPage = () => {
   const calculateTotal = () => {
     const subtotalAfterDiscount = total - discount;
     const tax = subtotalAfterDiscount * taxRate;
-    
+
     // Apply condition: If subtotal after discount > 5000, delivery charge is 0
     const effectiveDeliveryCharge = subtotalAfterDiscount > 5000 ? 0 : deliveryCharge;
-    
+
     // Apply COD charge only if payment method is 'Cash on Delivery'
     const effectiveCodCharge = paymentMethod === 'Cash on Delivery' ? extraDeliveryCharge : 0;
-    
+
     return subtotalAfterDiscount + tax + effectiveDeliveryCharge + effectiveCodCharge;
   };
-  
+
 
   const handlePaymentMethodChange = (method) => {
     setPaymentMethod(method);
@@ -202,7 +202,7 @@ const CheckoutPage = () => {
   const handleEmailBlur = (e) => {
     const { value } = e.target;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email validation
-  
+
     if (value && !emailRegex.test(value)) {
       toast.error('Please enter a valid email address.');
       setShippingAddress(prevState => ({
@@ -216,228 +216,228 @@ const CheckoutPage = () => {
       }));
     }
   };
-  
+
 
   // Inside the handleInputChange function
-const handleInputChange = (e) => {
-  const { name, value } = e.target;
-  
-  // Validation for state (only letters)
-  if (name === 'state' || name === 'city' || name === 'country') {
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+    // Validation for state (only letters)
+    if (name === 'state' || name === 'city' || name === 'country') {
       const lettersOnly = /^[A-Za-z\s]+$/;
       if (!lettersOnly.test(value)) {
-          // toast.error(`${name.charAt(0).toUpperCase() + name.slice(1)} should only contain letters and spaces.`);
-          return; // Prevent updating the state with invalid input
+        // toast.error(`${name.charAt(0).toUpperCase() + name.slice(1)} should only contain letters and spaces.`);
+        return; // Prevent updating the state with invalid input
       }
-  }
+    }
 
-  // Validation for apartmentSuite (only digits)
-  if (name === 'apartmentSuite') {
+    // Validation for apartmentSuite (only digits)
+    if (name === 'apartmentSuite') {
       const digitsOnly = /^\d+$/;
       if (!digitsOnly.test(value)) {
-          // toast.error('Apartment/Suite Number should only contain digits.');
-          return; // Prevent updating the state with invalid input
+        // toast.error('Apartment/Suite Number should only contain digits.');
+        return; // Prevent updating the state with invalid input
       }
-  }
+    }
 
-  // Validation for postal/ZIP code (only alphanumeric)
-  if (name === 'zip') {
+    // Validation for postal/ZIP code (only alphanumeric)
+    if (name === 'zip') {
       const alphanumeric = /^[A-Za-z0-9]+$/;
       if (!alphanumeric.test(value)) {
-          // toast.error('Postal/ZIP Code should only contain letters and digits.');
-          return; // Prevent updating the state with invalid input
+        // toast.error('Postal/ZIP Code should only contain letters and digits.');
+        return; // Prevent updating the state with invalid input
       }
-  }
+    }
 
-  setShippingAddress(prevState => ({
+    setShippingAddress(prevState => ({
       ...prevState,
       [name]: value
-  }));
-};
+    }));
+  };
 
-// Function to fetch product name by product ID
-const fetchProductNameById = async (id) => {
-  try {
-    const response = await axios.get(`/api/products/productname/${id}`);
-    if (response.data && response.data.name) {
-      return response.data.name;
-    } else {
+  // Function to fetch product name by product ID
+  const fetchProductNameById = async (id) => {
+    try {
+      const response = await axios.get(`/api/products/productname/${id}`);
+      if (response.data && response.data.name) {
+        return response.data.name;
+      } else {
+        return 'Unknown Product';
+      }
+    } catch (error) {
+      console.error('Error fetching product name:', error);
       return 'Unknown Product';
     }
-  } catch (error) {
-    console.error('Error fetching product name:', error);
-    return 'Unknown Product';
-  }
-};
+  };
 
 
 
-const handlePlaceOrder = async (e) => {
-  e.preventDefault();
+  const handlePlaceOrder = async (e) => {
+    e.preventDefault();
 
-  // Validate form before proceeding
-  if (!validateForm()) {
-    return;
-  }
-
-  let userId = null;
-  let token = null;
-
-  try {
-    token = sessionStorage.getItem('authToken');
-    if (token) {
-      const decoded = jwtDecode(token);
-      if (decoded.exp > Date.now() / 1000) {
-        userId = decoded.id; // Get the user ID from the token
-      } else {
-        sessionStorage.removeItem('authToken');
-        router.push('/customer/pages/login'); // Redirect to login if token is expired
-        return;
-      }
+    // Validate form before proceeding
+    if (!validateForm()) {
+      return;
     }
 
-    // Prepare order items (fetch product name for each item)
-    const orderItems = await Promise.all(
-      cart.map(async (item) => {
-        const productName = await fetchProductNameById(item.productId); // Fetch product name by ID
-        return {
-          productId: item.productId,
-          quantity: item.quantity,
-          price: item.price,
-          product: { name: productName } // Use the fetched product name
-        };
-      })
-    );
+    let userId = null;
+    let token = null;
 
-    console.log('Order Items:', orderItems); // Debug orderItems
+    try {
+      token = sessionStorage.getItem('authToken');
+      if (token) {
+        const decoded = jwtDecode(token);
+        if (decoded.exp > Date.now() / 1000) {
+          userId = decoded.id; // Get the user ID from the token
+        } else {
+          sessionStorage.removeItem('authToken');
+          router.push('/customer/pages/login'); // Redirect to login if token is expired
+          return;
+        }
+      }
 
-    // Calculate effective charges
-    const subtotalAfterDiscount = total - discount;
-    const calculatedTax = subtotalAfterDiscount * taxRate;
-
-    // Apply condition: If subtotal after discount > 5000, delivery charge is 0
-    const effectiveDeliveryCharge = subtotalAfterDiscount > 5000 ? 0 : deliveryCharge;
-
-    // Apply COD charge only if payment method is 'Cash on Delivery'
-    const effectiveCodCharge = paymentMethod === 'Cash on Delivery' ? extraDeliveryCharge : 0;
-
-    // Calculate total
-    const calculatedTotal = subtotalAfterDiscount + calculatedTax + effectiveDeliveryCharge + effectiveCodCharge;
-
-    // Prepare order details
-    const orderDetails = {
-      userId,
-      shippingAddress,
-      paymentMethod,
-      paymentInfo: paymentMethod === 'Credit Card' ? paymentInfo : null,
-      items: orderItems, // Pass the correct items structure
-      total: calculatedTotal,
-      discount,
-      tax: calculatedTax,
-      netTotal: calculatedTotal,
-      deliveryCharge: effectiveDeliveryCharge,
-      extraDeliveryCharge: effectiveCodCharge,
-      couponCode
-    };
-
-    console.log('Order Details:', orderDetails); // Debug orderDetails
-
-    // Place the order with your backend
-    const response = await axios.post('/api/orders', orderDetails, {
-      headers: token ? { Authorization: `Bearer ${token}` } : {}, // Include auth token if available
-    });
-
-    console.log('API Response:', response.data); // Log the response
-
-    if (response.data.status) {
-      setIsModalOpen(true);
-      localStorage.removeItem('cart'); // Clear the cart from localStorage
-      setCart([]); // Reset cart state
-
-      // Send order confirmation email
-      await sendOrderConfirmation(
-        shippingAddress.email, // Email to send to
-        shippingAddress.recipientName, // Customer's name
-        response.data.data.id, // Use order ID from backend response
-        calculatedTotal, // Total amount
-        orderItems, // Ordered items
-        shippingAddress, // Shipping address details
-        effectiveDeliveryCharge, // Delivery charge
-        effectiveCodCharge // Extra delivery charge for COD
+      // Prepare order items (fetch product name for each item)
+      const orderItems = await Promise.all(
+        cart.map(async (item) => {
+          const productName = await fetchProductNameById(item.productId); // Fetch product name by ID
+          return {
+            productId: item.productId,
+            quantity: item.quantity,
+            price: item.price,
+            product: { name: productName } // Use the fetched product name
+          };
+        })
       );
 
-      toast.success('Order placed successfully!');
-    } else {
-      console.error('API Error:', response.data);
+      console.log('Order Items:', orderItems); // Debug orderItems
+
+      // Calculate effective charges
+      const subtotalAfterDiscount = total - discount;
+      const calculatedTax = subtotalAfterDiscount * taxRate;
+
+      // Apply condition: If subtotal after discount > 5000, delivery charge is 0
+      const effectiveDeliveryCharge = subtotalAfterDiscount > 5000 ? 0 : deliveryCharge;
+
+      // Apply COD charge only if payment method is 'Cash on Delivery'
+      const effectiveCodCharge = paymentMethod === 'Cash on Delivery' ? extraDeliveryCharge : 0;
+
+      // Calculate total
+      const calculatedTotal = subtotalAfterDiscount + calculatedTax + effectiveDeliveryCharge + effectiveCodCharge;
+
+      // Prepare order details
+      const orderDetails = {
+        userId,
+        shippingAddress,
+        paymentMethod,
+        paymentInfo: paymentMethod === 'Credit Card' ? paymentInfo : null,
+        items: orderItems, // Pass the correct items structure
+        total: calculatedTotal,
+        discount,
+        tax: calculatedTax,
+        netTotal: calculatedTotal,
+        deliveryCharge: effectiveDeliveryCharge,
+        extraDeliveryCharge: effectiveCodCharge,
+        couponCode
+      };
+
+      console.log('Order Details:', orderDetails); // Debug orderDetails
+
+      // Place the order with your backend
+      const response = await axios.post('/api/orders', orderDetails, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {}, // Include auth token if available
+      });
+
+      console.log('API Response:', response.data); // Log the response
+
+      if (response.data.status) {
+        setIsModalOpen(true);
+        localStorage.removeItem('cart'); // Clear the cart from localStorage
+        setCart([]); // Reset cart state
+
+        // Send order confirmation email
+        await sendOrderConfirmation(
+          shippingAddress.email, // Email to send to
+          shippingAddress.recipientName, // Customer's name
+          response.data.data.id, // Use order ID from backend response
+          calculatedTotal, // Total amount
+          orderItems, // Ordered items
+          shippingAddress, // Shipping address details
+          effectiveDeliveryCharge, // Delivery charge
+          effectiveCodCharge // Extra delivery charge for COD
+        );
+
+        toast.success('Order placed successfully!');
+      } else {
+        console.error('API Error:', response.data);
+        toast.error('Failed to place order. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error placing order:', error); // Log the error
       toast.error('Failed to place order. Please try again.');
     }
-  } catch (error) {
-    console.error('Error placing order:', error); // Log the error
-    toast.error('Failed to place order. Please try again.');
-  }
-};
+  };
 
 
 
 
-// Function to send order confirmation email
-const sendOrderConfirmation = async (email, name, orderId, total, items, address, deliveryCharge, extraDeliveryCharge) => {
-  try {
-    // Ensure items is an array
-    if (!Array.isArray(items)) {
-      throw new Error('Items is not an array');
+  // Function to send order confirmation email
+  const sendOrderConfirmation = async (email, name, orderId, total, items, address, deliveryCharge, extraDeliveryCharge) => {
+    try {
+      // Ensure items is an array
+      if (!Array.isArray(items)) {
+        throw new Error('Items is not an array');
+      }
+
+      // Structure the items array to match the expected format in the backend
+      const formattedItems = items.map(item => ({
+        product: {
+          name: item.product?.name || 'Unknown Product', // Ensure the product name exists
+        },
+        quantity: item.quantity || 1,
+        price: item.price || 0,
+      }));
+
+      // Send the request to the backend API
+      const response = await axios.post('/api/sendOrderConfirmation', {
+        email,
+        name,
+        orderId,
+        total,
+        product: formattedItems, // Correctly structure the items array as "product"
+        address,
+        deliveryCharge,
+        extraDeliveryCharge,
+      });
+
+      toast.success('Order confirmation email sent successfully!');
+    } catch (error) {
+      console.error('Failed to send order confirmation email:', error);
+      toast.error('Failed to send order confirmation email.');
     }
-
-    // Structure the items array to match the expected format in the backend
-    const formattedItems = items.map(item => ({
-      product: {
-        name: item.product?.name || 'Unknown Product', // Ensure the product name exists
-      },
-      quantity: item.quantity || 1,
-      price: item.price || 0,
-    }));
-
-    // Send the request to the backend API
-    const response = await axios.post('/api/sendOrderConfirmation', {
-      email,
-      name,
-      orderId,
-      total,
-      product: formattedItems, // Correctly structure the items array as "product"
-      address,
-      deliveryCharge,
-      extraDeliveryCharge,
-    });
-
-    toast.success('Order confirmation email sent successfully!');
-  } catch (error) {
-    console.error('Failed to send order confirmation email:', error);
-    toast.error('Failed to send order confirmation email.');
-  }
-};
+  };
 
 
 
 
-// const sendOrderConfirmation = async (email, name, orderId, total, items, address) => {
-//   try {
-//     const response = await axios.post('/api/orders', {
-//       email,
-//       name,
-//       orderId,
-//       total,
-//       items,
-//       address,
-//     });
-//     toast.success('Order confirmation email sent successfully!');
-//   } catch (error) {
-//     console.error('Failed to send order confirmation email:', error);
-//     if (error.response && error.response.data) {
-//       console.error('Error details:', error.response.data);
-//     }
-//     toast.error('Failed to send order confirmation email.');
-//   }
-// };
+  // const sendOrderConfirmation = async (email, name, orderId, total, items, address) => {
+  //   try {
+  //     const response = await axios.post('/api/orders', {
+  //       email,
+  //       name,
+  //       orderId,
+  //       total,
+  //       items,
+  //       address,
+  //     });
+  //     toast.success('Order confirmation email sent successfully!');
+  //   } catch (error) {
+  //     console.error('Failed to send order confirmation email:', error);
+  //     if (error.response && error.response.data) {
+  //       console.error('Error details:', error.response.data);
+  //     }
+  //     toast.error('Failed to send order confirmation email.');
+  //   }
+  // };
 
 
 
@@ -579,41 +579,41 @@ const sendOrderConfirmation = async (email, name, orderId, total, items, address
           </div>
 
           <div className="border p-4">
-  <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
-  <div className="bg-white shadow-lg rounded-lg p-4 flex flex-col gap-2">
-    <div className="flex justify-between">
-      <p className="text-md font-medium text-gray-700">Subtotal:</p>
-      <p className="text-xl text-gray-700">Rs.{total.toFixed(2)}</p>
-    </div>
-    <div className="flex justify-between">
-      <p className="text-md font-medium text-gray-700">Discount ({total > 0 ? ((discount / total) * 100).toFixed(2) : 0}%):</p>
-      <p className="text-md text-gray-700">- Rs.{discount.toFixed(2)}</p>
-    </div>
-    <hr className="my-2" />
-    <div className="flex justify-between">
-      <p className="text-md font-medium text-gray-700">Subtotal after Discount:</p>
-      <p className="text-md text-gray-700">Rs.{(total - discount).toFixed(2)}</p>
-    </div>
-    <div className="flex justify-between">
-      <p className="text-md font-medium text-gray-700">Tax ({(taxRate * 100).toFixed(2)}%):</p>
-      <p className="text-md text-gray-700">Rs.{((total - discount) * taxRate).toFixed(2)}</p>
-    </div>
-    <div className="flex justify-between">
-      <p className="text-md font-medium text-gray-700">Delivery Charges:</p>
-      <p className="text-md text-gray-700">Rs.{(total - discount) > 5000 ? 0 : deliveryCharge.toFixed(2)}</p>
-    </div>
-    {paymentMethod === 'Cash on Delivery' && (
-      <div className="flex justify-between">
-        <p className="text-md font-medium text-gray-700">Cash On Delivery Charges:</p>
-        <p className="text-md text-gray-700">Rs.{extraDeliveryCharge.toFixed(2)}</p>
-      </div>
-    )}
-    <hr className="my-2" />
-    <div className="flex justify-between">
-      <p className="text-xl font-bold text-gray-700">Total:</p>
-      <p className="text-xl text-gray-700">Rs.{calculateTotal().toFixed(2)}</p>
-    </div>
-  </div>
+            <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
+            <div className="bg-white shadow-lg rounded-lg p-4 flex flex-col gap-2">
+              <div className="flex justify-between">
+                <p className="text-md font-medium text-gray-700">Subtotal:</p>
+                <p className="text-xl text-gray-700">Rs.{total.toFixed(2)}</p>
+              </div>
+              <div className="flex justify-between">
+                <p className="text-md font-medium text-gray-700">Discount ({total > 0 ? ((discount / total) * 100).toFixed(2) : 0}%):</p>
+                <p className="text-md text-gray-700">- Rs.{discount.toFixed(2)}</p>
+              </div>
+              <hr className="my-2" />
+              <div className="flex justify-between">
+                <p className="text-md font-medium text-gray-700">Subtotal after Discount:</p>
+                <p className="text-md text-gray-700">Rs.{(total - discount).toFixed(2)}</p>
+              </div>
+              <div className="flex justify-between">
+                <p className="text-md font-medium text-gray-700">Tax ({(taxRate * 100).toFixed(2)}%):</p>
+                <p className="text-md text-gray-700">Rs.{((total - discount) * taxRate).toFixed(2)}</p>
+              </div>
+              <div className="flex justify-between">
+                <p className="text-md font-medium text-gray-700">Delivery Charges:</p>
+                <p className="text-md text-gray-700">Rs.{(total - discount) > 5000 ? 0 : deliveryCharge.toFixed(2)}</p>
+              </div>
+              {paymentMethod === 'Cash on Delivery' && (
+                <div className="flex justify-between">
+                  <p className="text-md font-medium text-gray-700">Cash On Delivery Charges:</p>
+                  <p className="text-md text-gray-700">Rs.{extraDeliveryCharge.toFixed(2)}</p>
+                </div>
+              )}
+              <hr className="my-2" />
+              <div className="flex justify-between">
+                <p className="text-xl font-bold text-gray-700">Total:</p>
+                <p className="text-xl text-gray-700">Rs.{calculateTotal().toFixed(2)}</p>
+              </div>
+            </div>
 
             <div className="mt-6">
               <h2 className="text-2xl font-semibold mb-4">Coupon Code</h2>
@@ -638,7 +638,7 @@ const sendOrderConfirmation = async (email, name, orderId, total, items, address
 
             <div className="mt-6">
               <h2 className="text-2xl font-semibold mb-4">Payment Method</h2>
-              
+
               <div className="flex items-center">
                 <input
                   type="radio"
@@ -651,53 +651,53 @@ const sendOrderConfirmation = async (email, name, orderId, total, items, address
                 <label htmlFor="creditCard" className="ml-2">Credit Card</label>
               </div>
               {paymentMethod === 'Credit Card' && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div className="mb-4 relative flex items-center">
-                  <input
-                    type="text"
-                    placeholder="Card Number"
-                    value={paymentInfo.cardNumber}
-                    onChange={(e) => setPaymentInfo({ ...paymentInfo, cardNumber: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-md pr-10"
-                    required
-                  />
-                  <FiCreditCard className="absolute right-3 text-gray-500 font-bold" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                  <div className="mb-4 relative flex items-center">
+                    <input
+                      type="text"
+                      placeholder="Card Number"
+                      value={paymentInfo.cardNumber}
+                      onChange={(e) => setPaymentInfo({ ...paymentInfo, cardNumber: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-md pr-10"
+                      required
+                    />
+                    <FiCreditCard className="absolute right-3 text-gray-500 font-bold" />
+                  </div>
+                  <div className="mb-4 relative flex items-center">
+                    <input
+                      type="text"
+                      placeholder="Card Name"
+                      value={paymentInfo.cardName}
+                      onChange={(e) => setPaymentInfo({ ...paymentInfo, cardName: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-md pr-10"
+                      required
+                    />
+                    <FiUser className="absolute right-3 text-gray-500 font-bold" />
+                  </div>
+                  <div className="mb-4 relative flex items-center">
+                    <input
+                      type="text"
+                      placeholder="Expiry Date"
+                      value={paymentInfo.expiryDate}
+                      onChange={(e) => setPaymentInfo({ ...paymentInfo, expiryDate: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-md pr-10"
+                      required
+                    />
+                    <FiCalendar className="absolute right-3 text-gray-500 font-bold" />
+                  </div>
+                  <div className="mb-4 relative flex items-center">
+                    <input
+                      type="text"
+                      placeholder="CVV"
+                      value={paymentInfo.cvv}
+                      onChange={(e) => setPaymentInfo({ ...paymentInfo, cvv: e.target.value })}
+                      className="w-full px-4 py-2 border rounded-md pr-10"
+                      required
+                    />
+                    <FiLock className="absolute right-3 text-gray-500 font-bold" />
+                  </div>
                 </div>
-                <div className="mb-4 relative flex items-center">
-                  <input
-                    type="text"
-                    placeholder="Card Name"
-                    value={paymentInfo.cardName}
-                    onChange={(e) => setPaymentInfo({ ...paymentInfo, cardName: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-md pr-10"
-                    required
-                  />
-                  <FiUser className="absolute right-3 text-gray-500 font-bold" />
-                </div>
-                <div className="mb-4 relative flex items-center">
-                  <input
-                    type="text"
-                    placeholder="Expiry Date"
-                    value={paymentInfo.expiryDate}
-                    onChange={(e) => setPaymentInfo({ ...paymentInfo, expiryDate: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-md pr-10"
-                    required
-                  />
-                  <FiCalendar className="absolute right-3 text-gray-500 font-bold" />
-                </div>
-                <div className="mb-4 relative flex items-center">
-                  <input
-                    type="text"
-                    placeholder="CVV"
-                    value={paymentInfo.cvv}
-                    onChange={(e) => setPaymentInfo({ ...paymentInfo, cvv: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-md pr-10"
-                    required
-                  />
-                  <FiLock className="absolute right-3 text-gray-500 font-bold" />
-                </div>
-              </div>
-            )}
+              )}
               <div className="flex items-center mb-4">
                 <input
                   type="radio"
@@ -711,7 +711,7 @@ const sendOrderConfirmation = async (email, name, orderId, total, items, address
               </div>
             </div>
 
-       
+
 
             <button className="bg-teal-500 text-white py-2 px-4 rounded-md mt-8 w-full" type="submit">
               Place Order
