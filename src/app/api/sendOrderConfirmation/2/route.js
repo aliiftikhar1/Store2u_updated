@@ -1,4 +1,4 @@
-import { sendEmail } from "@/app/util/mail.utils"
+import { sendEmail } from "../../../util/mail.utils"
 
 export async function POST(){
     const sender ={

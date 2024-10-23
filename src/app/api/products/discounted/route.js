@@ -1,6 +1,6 @@
 // /api/products/discounted.js
 
-import prisma from "@/app/util/prisma";
+import prisma from "../../../util/prisma";
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {

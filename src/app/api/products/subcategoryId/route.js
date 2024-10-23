@@ -1,5 +1,5 @@
 // In your API route for products
-import prisma from "@/app/util/prisma"; // Ensure you're using Prisma or your DB ORM
+import prisma from "../../../util/prisma"; // Ensure you're using Prisma or your DB ORM
 
 // export default async function handler(req, res) {
 //   const subcategoryId = 1; // Hardcode subcategoryId to 1
