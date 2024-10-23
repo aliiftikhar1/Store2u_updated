@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';
+import prisma from '../../../util/prisma';
+
 
 // GET a single blog by ID
 export async function GET(request, { params }) {

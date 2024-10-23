@@ -5,7 +5,7 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { ThreeDots } from 'react-loader-spinner';
 import { useDispatch } from 'react-redux';
-import { addToCart, setCart } from '@/app/store/cartSlice';
+import { addToCart, setCart } from '../../../store/cartSlice';
 import { useRouter } from 'next/navigation';
 
 const AllProducts = () => {

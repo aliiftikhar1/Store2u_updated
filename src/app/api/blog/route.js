@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';
+import prisma from '../../util/prisma';
 // Create a new blog record
 export async function POST(request) {
   try {

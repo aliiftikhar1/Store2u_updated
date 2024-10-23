@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';
+import prisma from '../../util/prisma';
 
 // Get all categories (GET /api/categories)
 export async function GET() {

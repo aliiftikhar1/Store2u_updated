@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 // import prisma from '../../../util/prisma';
-import prisma from '@/app/util/prisma';
+import prisma from '../../../util/prisma';
 // import prisma from '@/util/prisma';
 
 // Fetch a single coupon by ID
