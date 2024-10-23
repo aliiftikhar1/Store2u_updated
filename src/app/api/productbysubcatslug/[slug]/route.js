@@ -1,11 +1,12 @@
-// pages/api/productsBySubcategorySlug.js
-import prisma from '../../../util/prisma'
+import prisma from '../../../util/prisma';
+import { NextResponse } from 'next/server';
 
-export default async function handler(req, res) {
-  const { slug } = req.query; // Get the slug from the query parameters
+// GET request handler
+export async function GET(request, { params }) {
+  const { slug } = params; // Get the slug from the route parameters
 
   if (!slug) {
-    return res.status(400).json({ error: 'Subcategory slug is required.' });
+    return NextResponse.json({ error: 'Subcategory slug is required.' }, { status: 400 });
   }
 
   try {
@@ -20,14 +21,14 @@ export default async function handler(req, res) {
     });
 
     if (!subcategory) {
-      return res.status(404).json({ error: 'Subcategory not found.' });
+      return NextResponse.json({ error: 'Subcategory not found.' }, { status: 404 });
     }
 
     // Return the products associated with the found subcategory
-    return res.status(200).json(subcategory.products);
+    return NextResponse.json(subcategory.products, { status: 200 });
   } catch (error) {
     console.error('Error fetching products:', error);
-    return res.status(500).json({ error: 'Internal Server Error' });
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   } finally {
     await prisma.$disconnect(); // Disconnect from the database
   }
