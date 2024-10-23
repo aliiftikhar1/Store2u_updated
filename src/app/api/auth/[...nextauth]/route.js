@@ -1,9 +1,8 @@
-import prisma from '../../../util/prisma'
+import prisma from '../../../../util/prisma'; // Adjusting path to prisma
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-
-export default NextAuth({
+const handler = NextAuth({
   providers: [
     CredentialsProvider({
       credentials: {
@@ -32,3 +31,6 @@ export default NextAuth({
     }
   }
 });
+
+// Instead of exporting default, use the appropriate methods for API routes
+export { handler as GET, handler as POST };
