@@ -211,13 +211,13 @@ const total = subtotalLessDiscount + totalTax + (order.deliveryCharge ?? 0) + (o
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           {item.product && item.product.images && item.product.images.length > 0 ? (
                             <img
-                              src={`https://murshadpkdata.advanceaitool.com/uploads/${item.product.images[0].url}`}
+                              src={`https://data.tascpa.ca/uploads/${item.product.images[0].url}`}
                               alt={item.product.name}
                               className="w-16 h-16 object-cover rounded-md"
                             />
                           ) : (
                             <img
-                              src="https://murshadpkdata.advanceaitool.com/uploads/placeholder.jpg"
+                              src="https://data.tascpa.ca/uploads/placeholder.jpg"
                               alt="Placeholder"
                               className="w-16 h-16 object-cover rounded-md"
                             />

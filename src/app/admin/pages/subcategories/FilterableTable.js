@@ -41,7 +41,7 @@ const FilterableTable = ({ subcategories = [], fetchSubcategories }) => {
       // Upload new image if provided
       if (image) {
         const imageBase64 = await convertToBase64(image);
-        const response = await fetch('https://murshadpkdata.advanceaitool.com/uploadImage.php', {
+        const response = await fetch('https://data.tascpa.ca/uploadImage.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -246,7 +246,7 @@ const FilterableTable = ({ subcategories = [], fetchSubcategories }) => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {item.imageUrl && (
                         <img
-                          src={`https://murshadpkdata.advanceaitool.com/uploads/${item.imageUrl}`}
+                          src={`https://data.tascpa.ca/uploads/${item.imageUrl}`}
                           alt={item.name}
                           className="w-16 h-16 object-cover"
                         />
@@ -337,7 +337,7 @@ const FilterableTable = ({ subcategories = [], fetchSubcategories }) => {
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700">Current Image</label>
                 <img
-                  src={`https://murshadpkdata.advanceaitool.com/uploads/${newSubcategory.imageUrl}`}
+                  src={`https://data.tascpa.ca/uploads/${newSubcategory.imageUrl}`}
                   alt={newSubcategory.name}
                   className="w-32 h-32 object-cover mb-2"
                 />

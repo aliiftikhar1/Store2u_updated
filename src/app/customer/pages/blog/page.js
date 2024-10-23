@@ -67,7 +67,7 @@ function BlogPosts({ blogs }) {
         {blogs.map((post, index) => (
           <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden">
             <img
-              src={`https://murshadpkdata.advanceaitool.com/uploads/${post.image} `}
+              src={`https://data.tascpa.ca/uploads/${post.image} `}
               alt={post.title}
               width={400}
               height={300}

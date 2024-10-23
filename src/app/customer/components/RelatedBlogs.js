@@ -99,7 +99,7 @@ const RelatedBlogs = ({ category, currentBlogId }) => {
           {relatedBlogs.map(blog => (
             <li key={blog.id} className="mb-4 flex items-start">
               <img
-                src={`https://murshadpkdata.advanceaitool.com/uploads/${blog.image}`} // Replace with your actual image path
+                src={`https://data.tascpa.ca/uploads/${blog.image}`} // Replace with your actual image path
                 alt={blog.title}
                 className="w-16 h-16 object-cover rounded-lg mr-4"
               />

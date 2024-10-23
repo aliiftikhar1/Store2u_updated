@@ -100,7 +100,7 @@ const AllProducts = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
         {products.length > 0 ? (
           products.map((product) => {
             const originalPrice = calculateOriginalPrice(product.price, product.discount);
@@ -117,7 +117,7 @@ const AllProducts = () => {
                 <div className="relative">
                   {product.images && product.images.length > 0 ? (
                     <motion.img
-                      src={`https://murshadpkdata.advanceaitool.com/uploads/${product.images[0]}`}
+                      src={`https://data.tascpa.ca/uploads/${product.images[0]}`}
                       alt={product.name}
                       className="h-[240px] md:h-[220px] w-full object-cover mb-4 rounded bg-white"
                       whileHover={{ scale: 1.1 }}

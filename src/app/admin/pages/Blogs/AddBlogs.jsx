@@ -135,7 +135,7 @@ const AddBlogs = () => {
   const uploadImageToExternalAPI = async (imageBase64) => {
     try {
       const response = await axios.post(
-        "https://murshadpkdata.advanceaitool.com/uploadImage.php",
+        "https://data.tascpa.ca/uploadImage.php",
         { image: imageBase64 }
       );
       return response.data.image_url; 
@@ -327,7 +327,7 @@ const AddBlogs = () => {
         Cell: ({ value }) => {
           return (
             <img
-              src={`https://murshadpkdata.advanceaitool.com/uploads/${value.trim()}`}
+              src={`https://data.tascpa.ca/uploads/${value.trim()}`}
               alt="Blog Image"
               style={{ maxWidth: "50px", maxHeight: "50px" }}
             />
@@ -800,7 +800,7 @@ const AddBlogs = () => {
                       src={
                         editingBlog.image instanceof File
                           ? URL.createObjectURL(editingBlog.image)
-                          : `https://murshadpkdata.advanceaitool.com/uploads/${editingBlog.image}`
+                          : `https://data.tascpa.ca/uploads/${editingBlog.image}`
                       }
                       alt="Uploaded"
                       style={{

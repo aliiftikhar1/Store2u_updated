@@ -195,7 +195,7 @@ const UserOrders = () => {
                   <div key={item.id} className="bg-white flex items-start justify-between p-4 border-b border-gray-300">
                     {item.product.images && item.product.images.length > 0 ? (
                       <img
-                        src={`https://murshadpkdata.advanceaitool.com/uploads/${item.product.images[0].url}`}
+                        src={`https://data.tascpa.ca/uploads/${item.product.images[0].url}`}
                         alt={item.product.name}
                         className="h-20 w-20 object-cover rounded mr-4"
                       />

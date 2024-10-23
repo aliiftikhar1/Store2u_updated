@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 
 // Fetch product data server-side using async function
 async function getProductData(slug) {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL ;
 
   try {
     const res = await fetch(`${apiUrl}/api/products/${slug}`, { cache: 'no-store' });

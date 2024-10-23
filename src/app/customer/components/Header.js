@@ -222,7 +222,7 @@ const Header = () => {
                         {/* Category Image */}
                         {category.imageUrl && (
                           <img
-                            src={`https://murshadpkdata.advanceaitool.com/uploads/${category.imageUrl}`}
+                            src={`https://data.tascpa.ca/uploads/${category.imageUrl}`}
                             alt={category.name}
                             className="w-8 h-8 object-cover rounded-full"
                           />

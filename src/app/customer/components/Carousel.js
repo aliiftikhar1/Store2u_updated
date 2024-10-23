@@ -14,7 +14,7 @@ function Slider() {
       }
       const data = await response.json();
       const formattedSlides = data.map(slide => ({
-        image: `https://murshadpkdata.advanceaitool.com/uploads/${slide.imgurl}`,
+        image: `https://data.tascpa.ca/uploads/${slide.imgurl}`,
         link: slide.link,
       }));
       setSlides(formattedSlides);
@@ -40,7 +40,7 @@ function Slider() {
               />
               <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none bg-black bg-opacity-50">
                 <h1 className='text-2xl md:text-4xl lg:text-5xl font-bold text-white pb-3 text-center px-2'>
-                  Welcome to Our Murshadpk Store
+                  Welcome to Our Store2u
                 </h1>
                 <p className='w-[90%] md:w-[680px] lg:w-[800px] mx-auto pb-10 text-center text-white px-4'>
                   Discover a variety of products at unbeatable prices. Shop now and enjoy a seamless online shopping experience with us!

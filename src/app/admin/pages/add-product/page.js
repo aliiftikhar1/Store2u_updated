@@ -213,7 +213,7 @@ const missingFields = requiredFields
       const uploadedImages = await Promise.all(
         images.map(async (img) => {
           const imageBase64 = await convertToBase64(img);
-          const response = await fetch('https://murshadpkdata.advanceaitool.com/uploadImage.php', {
+          const response = await fetch('https://data.tascpa.ca/uploadImage.php', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -566,7 +566,7 @@ const missingFields = requiredFields
                 {existingImages.map((img, index) => (
                   <div key={index} className="relative">
                     <img
-                      src={`https://murshadpkdata.advanceaitool.com/uploads/${img}`}
+                      src={`https://data.tascpa.ca/uploads/${img}`}
                       alt={`Product Image ${index + 1}`}
                       className="w-full h-32 object-cover rounded"
                       onError={(e) => {

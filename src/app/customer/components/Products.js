@@ -162,7 +162,7 @@ const Products = () => {
                   <Link href={`/customer/pages/category/${category.slug}`}>
                     {category.imageUrl ? (
                       <img
-                        src={`https://murshadpkdata.advanceaitool.com/uploads/${category.imageUrl}`}
+                        src={`https://data.tascpa.ca/uploads/${category.imageUrl}`}
                         alt={category.name}
                         className="w-full h-[220px] md:h-[320px] shadow-md object-cover cursor-pointer"
                       />
@@ -194,7 +194,7 @@ const Products = () => {
                           <div className="relative">
                             {product.images && product.images.length > 0 ? (
                               <motion.img
-                                src={`https://murshadpkdata.advanceaitool.com/uploads/${product.images[0].url}`}
+                                src={`https://data.tascpa.ca/uploads/${product.images[0].url}`}
                                 alt={product.name}
                                 className="h-[220px] w-full object-cover mb-4 rounded bg-white cursor-pointer"
                                 whileHover={{ scale: 1.1 }}

@@ -52,7 +52,7 @@ export default function BlogCategorySlider({ category, blogs }) {
                   <a href={`/customer/pages/blog/${blog.id}`}>
                     <div className="relative w-full h-64 sm:h-80 lg:h-[700px]">
                       <img
-                        src={`https://murshadpkdata.advanceaitool.com/uploads/${blog.image}`}
+                        src={`https://data.tascpa.ca/uploads/${blog.image}`}
                         alt={blog.title}
                         className="absolute inset-0 w-full h-full object-cover rounded-lg"
                       />
@@ -76,7 +76,7 @@ export default function BlogCategorySlider({ category, blogs }) {
               <div key={index} className="flex items-center space-x-4">
                 <div className="w-1/3">
                   <img
-                    src={`https://murshadpkdata.advanceaitool.com/uploads/${blog.image}`}
+                    src={`https://data.tascpa.ca/uploads/${blog.image}`}
                     alt={blog.title}
                     className="w-full h-20 sm:h-24 object-cover rounded-lg"
                   />

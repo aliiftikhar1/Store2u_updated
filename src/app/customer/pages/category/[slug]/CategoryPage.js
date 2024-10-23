@@ -88,7 +88,7 @@ const CategoryPage = ({ categoryData }) => {
             >
               {subcategory.imageUrl ? (
                 <motion.img
-                  src={`https://murshadpkdata.advanceaitool.com/uploads/${subcategory.imageUrl}`}
+                  src={`https://data.tascpa.ca/uploads/${subcategory.imageUrl}`}
                   alt={subcategory.name}
                   className="w-full h-40 object-cover mb-2 rounded"
                   whileHover={{ scale: 1.1 }}

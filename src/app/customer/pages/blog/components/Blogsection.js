@@ -69,7 +69,7 @@ const BlogSection = ({ blogs, title, category }) => {
               <div className="bg-white rounded-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 h-full flex flex-col">
                 <div className="relative pb-56 flex-shrink-0">
                   <img
-                    src={`https://murshadpkdata.advanceaitool.com/uploads/${blog.image}`}
+                    src={`https://data.tascpa.ca/uploads/${blog.image}`}
                     alt={blog.title}
                     className="absolute inset-0 w-full h-full object-cover rounded-t-lg"
                   />

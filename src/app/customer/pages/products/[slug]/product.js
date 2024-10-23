@@ -174,7 +174,7 @@ const ProductPage = ({ productData }) => {
 
   // Utility function to get the image URL
   const getImageUrl = (url) => {
-    return `https://murshadpkdata.advanceaitool.com/uploads/${url}`;
+    return `https://data.tascpa.ca/uploads/${url}`;
   };
 
   const handleThumbnailClick = (index) => {

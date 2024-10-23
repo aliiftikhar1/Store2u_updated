@@ -181,7 +181,7 @@ const FilterableTable = ({
           const imageBase64 = await convertToBase64(file);
           console.log("Uploading image:", file.name); // Log image details
           const response = await fetch(
-            'https://murshadpkdata.advanceaitool.com/uploadImage.php',
+            'https://data.tascpa.ca/uploadImage.php',
             {
               method: 'POST',
               headers: {
@@ -194,7 +194,7 @@ const FilterableTable = ({
           if (response.ok) {
             console.log(
               "Uploaded image URL:",
-              `https://murshadpkdata.advanceaitool.com/uploads/${result.image_url}`
+              `https://data.tascpa.ca/uploads/${result.image_url}`
             );
             return result.image_url; // Return relative path
           } else {
@@ -443,7 +443,7 @@ const FilterableTable = ({
       <img
         src={item.images[0].url.startsWith('https://')
           ? item.images[0].url
-          : `https://murshadpkdata.advanceaitool.com/uploads/${item.images[0].url}`}
+          : `https://data.tascpa.ca/uploads/${item.images[0].url}`}
         alt="Product Image"
         className="w-16 h-16 object-cover"
       />
@@ -772,7 +772,7 @@ const FilterableTable = ({
                     {existingImages.map((img, index) => (
                       <div key={index} className="relative">
                         <img
-                          src={`https://murshadpkdata.advanceaitool.com/uploads/${img}`} // Prepend base URL
+                          src={`https://data.tascpa.ca/uploads/${img}`} // Prepend base URL
                           alt={`Product Image ${index}`}
                           className="w-full h-32 object-cover"
                         />

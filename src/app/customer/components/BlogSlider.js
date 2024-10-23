@@ -67,7 +67,7 @@ export default function BlogSlider({ blogs }) {
       <div className="bg-white rounded-lg hover:shadow-lg hover:shadow-white border-2 hover:border-gray-600 border-gray-500 transition duration-300 transform hover:-translate-y-2 h-full flex flex-col">
         <div className="relative pb-56 flex-shrink-0">
           <img
-            src={`https://murshadpkdata.advanceaitool.com/uploads/${blog.image}`}
+            src={`https://data.tascpa.ca/uploads/${blog.image}`}
             alt={blog.title}
             className="absolute inset-0 w-full h-full object-cover rounded-t-lg"
           />
