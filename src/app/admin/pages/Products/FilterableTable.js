@@ -173,7 +173,7 @@ const FilterableTable = ({
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-  
+
     try {
       // Handle new image uploads using productForm.images
       const uploadedImages = await Promise.all(
@@ -202,12 +202,12 @@ const FilterableTable = ({
           }
         })
       );
-  
+
       const stockValue = parseInt(productForm.stock, 10);
-  
+
       // Extract relative image paths from existingImages
       const existingRelativeImages = existingImages; // These are already relative paths
-  
+
       const productData = {
         ...productForm,
         stock: isNaN(stockValue) ? 0 : stockValue,
@@ -224,9 +224,9 @@ const FilterableTable = ({
         meta_keywords: productForm.meta_keywords,
         subcategorySlug: productForm.subcategorySlug, // Ensure subcategorySlug is included
       };
-  
+
       console.log("Product data being sent to API:", productData);
-  
+
       const response = await fetch(`/api/products/${editProduct.slug}`, {
         method: 'PUT',
         headers: {
@@ -234,7 +234,7 @@ const FilterableTable = ({
         },
         body: JSON.stringify(productData),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         console.log("Update response from API:", data);
@@ -269,7 +269,7 @@ const FilterableTable = ({
     }
     setIsLoading(false);
   };
-  
+
 
   const handleCancelEdit = () => {
     setEditProduct(null);
@@ -393,107 +393,103 @@ const FilterableTable = ({
 
         {/* Products Table */}
         <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200 w-full">
-            <thead className="bg-gray-50">
-              <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  ID
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Image
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Slug
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Description
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Price
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Stock
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Updated At
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-            
-              {Array.isArray(filteredData) &&
-                filteredData.map((item, index) => (
-                  <tr
-                    key={item.slug}
-                    className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
-                  >
-                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {item.id}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-  {item.images && item.images.length > 0 ? (
-    <>
-      {console.log(`Image path for product ${item.name}:`, item.images[0])}
-      <img
-        src={item.images[0].url.startsWith('https://')
-          ? item.images[0].url
-          : `https://data.tascpa.ca/uploads/${item.images[0].url}`}
-        alt="Product Image"
-        className="w-16 h-16 object-cover"
-      />
-    </>
-  ) : (
-    'N/A'
-  )}
-</td>
+  <table className="min-w-full divide-y divide-gray-200 w-full max-w-full">
+    <thead className="bg-gray-50">
+      <tr>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          ID
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Image
+        </th>
+        <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[300px]">
+          Slug
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Name
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider min-w-[400px]">
+          Description
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Price
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Stock
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Updated At
+        </th>
+        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+          Actions
+        </th>
+      </tr>
+    </thead>
+    <tbody className="bg-white divide-y divide-gray-200">
+      {Array.isArray(filteredData) &&
+        filteredData.map((item, index) => (
+          <tr
+            key={item.slug}
+            className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
+          >
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+              {item.id}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {item.images && item.images.length > 0 ? (
+                <img
+                  src={item.images[0].url.startsWith('https://')
+                    ? item.images[0].url
+                    : `https://data.tascpa.ca/uploads/${item.images[0].url}`}
+                  alt="Product Image"
+                  className="w-16 h-16 object-cover"
+                />
+              ) : (
+                'N/A'
+              )}
+            </td>
+            <td className="px-2 py-4 whitespace-normal  text-sm font-medium text-gray-900 min-w-[300px] ">
+              {item.slug}
+            </td>
+            <td className="px-6 py-4 text-sm text-gray-500">
+              {item.name}
+            </td>
+            <td
+              className="px-6 py-4 text-sm text-gray-500 min-w-[500px] overflow-hidden text-ellipsis"
+              dangerouslySetInnerHTML={{
+                __html: item.description,
+              }}
+            ></td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {item.price}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {item.stock}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              {new Date(item.updatedAt).toLocaleString()}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+              <button
+                onClick={() => handleEditItem(item)}
+                className="text-indigo-600 hover:text-indigo-900 transition duration-150 ease-in-out"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDeleteClick(item.slug)}
+                className="text-red-600 hover:text-red-900 transition duration-150 ease-in-out"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        ))}
+    </tbody>
+  </table>
+</div>
 
 
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {item.slug}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-500">
-                      {item.name}
-                    </td>
-                    <td
-                      className="px-6 py-4 text-sm text-gray-500"
-                      dangerouslySetInnerHTML={{
-                        __html: item.description,
-                      }}
-                    ></td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {item.price}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {item.stock}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {new Date(item.updatedAt).toLocaleString()}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                      <button
-                        onClick={() => handleEditItem(item)}
-                        className="text-indigo-600 hover:text-indigo-900 transition duration-150 ease-in-out"
-                      >
-                        Edit
-                      </button>
-                      <button
-                        onClick={() => handleDeleteClick(item.slug)}
-                        className="text-red-600 hover:text-red-900 transition duration-150 ease-in-out"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
       </div>
 
       {/* Edit Product Modal */}
@@ -518,20 +514,20 @@ const FilterableTable = ({
 
               {/* Slug */}
               <div className="mb-4">
-  <label className="block text-sm font-medium text-gray-700">
-    Slug
-  </label>
-  <input
-    type="text"
-    name="slug"
-    value={productForm.slug}
-    onChange={(e) => {
-      const updatedSlug = e.target.value.replace(/\s+/g, '-'); // Replace spaces with dashes
-      setProductForm({ ...productForm, slug: updatedSlug });
-    }}
-    className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-  />
-</div>
+                <label className="block text-sm font-medium text-gray-700">
+                  Slug
+                </label>
+                <input
+                  type="text"
+                  name="slug"
+                  value={productForm.slug}
+                  onChange={(e) => {
+                    const updatedSlug = e.target.value.replace(/\s+/g, '-'); // Replace spaces with dashes
+                    setProductForm({ ...productForm, slug: updatedSlug });
+                  }}
+                  className="mt-1 p-2 border border-gray-300 rounded w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
 
 
               {/* Description */}

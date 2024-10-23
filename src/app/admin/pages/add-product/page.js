@@ -71,7 +71,7 @@ const AddProductPageContent = () => {
 
   const fetchSubcategories = async (categorySlug) => {
     try {
-      const response = await fetch(`/api/subcategories?categorySlug=${categorySlug}`);
+      const response = await fetch(`/api/subcategories/${categorySlug}`);
       if (!response.ok) {
         throw new Error('Failed to fetch subcategories');
       }
