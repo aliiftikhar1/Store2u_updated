@@ -4,14 +4,11 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { FiUser, FiHome, FiMapPin, FiPhone, FiMail, FiCreditCard, FiCalendar, FiLock, FiTag } from 'react-icons/fi';
-import { jwtDecode } from 'jwt-decode'; // Note: corrected import
+import { jwtDecode } from 'jwt-decode';
 import Modal from 'react-modal';
-import { toast, ToastContainer } from 'react-toastify'; // Ensure this line is correct
-import 'react-toastify/dist/ReactToastify.css'; // Ensure this line is correct
+import { toast, ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 // import { sendOrderConfirmation } from '@/app/util/sendOrderConfirmation';
-
-// Your component code follows...
-
 
 const CheckoutPage = () => {
   const [shippingAddress, setShippingAddress] = useState({
@@ -32,6 +29,7 @@ const CheckoutPage = () => {
     expiryDate: '',
     cvv: ''
   });
+
   const [cart, setCart] = useState([]);
   const [total, setTotal] = useState(0);
   const [couponCode, setCouponCode] = useState('');
@@ -54,30 +52,29 @@ const CheckoutPage = () => {
       fetchExtraDeliveryCharge();
     }
   }, [paymentMethod]);
+
   const validateForm = () => {
     const { recipientName, streetAddress, city, state, zip, country, phoneNumber, email } = shippingAddress;
 
-    // Check if any of the required fields are empty
+    
     if (!recipientName || !streetAddress || !city || !state || !zip || !country || !phoneNumber || !email) {
       toast.error('Please fill in all the required fields.');
       return false;
     }
 
-    // Validate email format
+   
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       toast.error('Please enter a valid email address.');
       return false;
     }
 
-    // Validate phone number
     const phoneRegex = /^\+92\d{10}$/;
     if (!phoneRegex.test(phoneNumber)) {
       toast.error('Please enter a valid phone number.');
       return false;
     }
 
-    // All validations passed
     return true;
   };
 
