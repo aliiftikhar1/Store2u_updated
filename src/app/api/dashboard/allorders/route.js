@@ -6,9 +6,11 @@ export async function POST(request) {
     // Parse the request body to get date1 and date2
     const { date1, date2 } = await request.json();
 
-    // Convert date strings to Date objects
+    // Convert date strings to Date objects, preserving the time part if present
     const startDate = new Date(date1);
     const endDate = new Date(date2);
+
+    // Log for debugging
     console.log("Start date is:", startDate, "End date is:", endDate);
 
     // Validate the dates
@@ -19,13 +21,16 @@ export async function POST(request) {
       );
     }
 
-    // Ensure endDate is after startDate
+    // Ensure endDate is after startDate, add end of day to endDate
     if (endDate < startDate) {
       return NextResponse.json(
         { error: 'End date must be after start date' },
         { status: 400 }
       );
     }
+
+    // Ensure the endDate includes the full day (23:59:59) to include orders from the whole day
+    endDate.setHours(23, 59, 59, 999);
 
     // List of statuses to aggregate
     const statuses = ['PENDING', 'PAID', 'SHIPPED', 'COMPLETED', 'CANCELLED'];
