@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';
+import prisma from '../../../util/prisma';
 import nodemailer from 'nodemailer';
 
 export async function GET(request, { params }) {

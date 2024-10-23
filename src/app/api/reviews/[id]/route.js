@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';
+import prisma from '../../../util/prisma';
 
 // DELETE - Delete a review by ID
 export async function DELETE(request,{params}) {

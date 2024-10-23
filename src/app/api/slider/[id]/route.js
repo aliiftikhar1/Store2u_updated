@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';
+import prisma from '../../../util/prisma';
 // GET request to fetch a specific slider by ID
 export async function GET(request, { params }) {
   try {

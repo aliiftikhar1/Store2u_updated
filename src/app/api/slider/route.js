@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';// Adjust the path according to your project structure
+import prisma from '../../util/prisma';// Adjust the path according to your project structure
 
 // POST request to create a new slider
 export async function POST(request) {

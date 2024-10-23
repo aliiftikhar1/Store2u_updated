@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';  // Assuming prisma is setup in your project
+import prisma from '../../../util/prisma';  // Assuming prisma is setup in your project
 
 export async function GET(request, { params }) {
   const { slug } = params;  // Extract the slug from the parameters

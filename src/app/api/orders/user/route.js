@@ -1,4 +1,4 @@
-import prisma from '@/app/util/prisma';
+import prisma from '../../../util/prisma';
 import jwt from 'jsonwebtoken';
 
 const SECRET_KEY = process.env.JWT_SECRET || 'your_secret_key';

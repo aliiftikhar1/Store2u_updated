@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma'; // Import your Prisma or DB utility
+import prisma from '../../util/prisma'; // Import your Prisma or DB utility
 
 // GET: Fetch the list of Facebook Pixels
 export async function GET() {

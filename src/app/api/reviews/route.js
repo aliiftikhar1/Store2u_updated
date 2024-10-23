@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';
+import prisma from '../../util/prisma';
 
 // POST - Add a new review
 export async function POST(request) {

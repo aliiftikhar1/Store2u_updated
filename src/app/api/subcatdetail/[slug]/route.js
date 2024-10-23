@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';  // Ensure this path is correct based on your project structure
+import prisma from '../../../util/prisma';  // Ensure this path is correct based on your project structure
 
 // Get subcategory details by slug
 // export async function GET(request, { params }) {

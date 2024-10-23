@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';
+import prisma from '../../../../util/prisma';
 
 export async function GET(request, { params }) {
   const search = params.id; // Fetch the search query from the URL parameters

@@ -1,6 +1,6 @@
 // adminUser API
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma';
+import prisma from '../../../util/prisma';
 import bcrypt from 'bcryptjs';
 import crypto from 'crypto';
 

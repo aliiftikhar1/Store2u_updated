@@ -1,4 +1,4 @@
-import prisma from '@/app/util/prisma'; // Make sure to import your Prisma client
+import prisma from '../../util/prisma'; // Make sure to import your Prisma client
 import { NextResponse } from 'next/server';
 // Fetch all pixel codes
 export async function GET() {

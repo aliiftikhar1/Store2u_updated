@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import prisma from '@/app/util/prisma'; // Adjust the path based on your project structure
+import prisma from '../../../util/prisma'; // Adjust the path based on your project structure
 
 // Fetch social media links by ID
 export async function GET(request, { params }) {

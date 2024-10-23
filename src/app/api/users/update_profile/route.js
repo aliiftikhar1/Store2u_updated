@@ -1,5 +1,5 @@
 // import prisma from '../../../util/prisma';
-import prisma from '@/app/util/prisma';
+import prisma from '../../../util/prisma';
 // import prisma from '../../../util/prisma';
 import { NextResponse } from 'next/server';
 
