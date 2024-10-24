@@ -57,15 +57,17 @@ export async function POST(request) {
 
     // Set up email content with a professional design
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.titan.email', // Hostinger's SMTP server
+      port: 465, // Secure port for SMTP over SSL
+      secure: true, // Use SSL
       auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
+        user: process.env.MAIL_USER, // Your Hostinger email address
+        pass: process.env.MAIL_PASSWORD, // Your Hostinger email password
       },
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_USERNAME,
+      from: process.env.MAIL_USER,
       to: email,
       subject: `Order Confirmation - Order ID #${orderId}`,
       html: `
